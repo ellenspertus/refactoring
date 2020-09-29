@@ -21,6 +21,6 @@ class RentalTest {
     void getAmount_CorrectValue_RegularMovies(String daysRented, String expectedPrice)
     {
         Rental rental = new Rental(MOVIE_REGULAR, Integer.parseInt(daysRented));
-        assertEquals(Integer.parseInt(expectedPrice), rental.getRentalPrice());
+        assertEquals(Double.parseDouble(expectedPrice), rental.getRentalPrice());
     }
 }
