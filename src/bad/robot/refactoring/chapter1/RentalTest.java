@@ -32,4 +32,10 @@ class RentalTest {
         Rental rental = new Rental(MOVIE_REGULAR, Integer.parseInt(daysRented));
         assertNotSame(Double.parseDouble(expectedPrice), rental.getRentalPrice());
     }
+
+    @CsvSource({"1,3", "2,6", "3,9", "10,30"})
+    void getAmount_CorrectValue_NewMovie(int days, int cost) {
+        Rental rental = new Rental(MOVIE_NEW, days);
+        assertEquals(cost, rental.getRentalPrice(), "Wrong cost for " + days + "-day rental");
+    }
 }

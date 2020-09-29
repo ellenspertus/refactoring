@@ -20,8 +20,6 @@ public class Rental {
 
     protected double getRentalPrice() {
         double amount = 0;
-        // you could also use this.getMovie()..., but that would mainly be used if you happen to
-        // have a variable that has the same name as the method
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
                 amount += 2;
