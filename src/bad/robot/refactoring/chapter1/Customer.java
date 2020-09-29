@@ -28,7 +28,7 @@ public class Customer {
         for (Rental rental : rentals) {
             double amount = rental.getRentalPrice();
 
-            frequentRenterPoints += rental.getFrequentRenterPoints(rental);
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             // show figures for this rental
             result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
