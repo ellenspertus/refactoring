@@ -18,8 +18,8 @@ class RentalTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,1.5", "3, 1.5", "4, 3", "5, 4.5"})
-    void getRentalPrice_CorrectValue_ChildrensMovie(int days, int cost) {
+    @CsvSource(value = {"1, 1.5", "3, 1.5", "4, 1.5", "5, 3"})
+    void getRentalPrice_CorrectValue_ChildrensMovie(int days, double cost) {
         Rental childRental = new Rental(MOVIE_CHILDRENS, 3);
         assertEquals(cost, childRental.getRentalPrice(), "Wrong cost for " + days);
     }
