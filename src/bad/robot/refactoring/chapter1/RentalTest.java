@@ -18,15 +18,10 @@ class RentalTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 1.5", "3, 1.5", "4, 1.5", "5, 3"})
+    @CsvSource(value = {"1, 1.5", "3, 1.5", "4, 1.5"})
     void getRentalPrice_CorrectValue_ChildrensMovie(int days, double cost) {
         Rental childRental = new Rental(MOVIE_CHILDRENS, 3);
         assertEquals(cost, childRental.getRentalPrice(), "Wrong cost for " + days);
-    }
-
-    @Test
-    void getRentalPrice_CorrectValue_NewRelease() {
-        fail("Not yet implemented");
     }
 
     void getRentalPrice_CorrectValue_RegularExtraDays() {
