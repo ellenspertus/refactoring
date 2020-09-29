@@ -1,6 +1,7 @@
 package bad.robot.refactoring.chapter1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -22,5 +23,13 @@ class RentalTest {
     {
         Rental rental = new Rental(MOVIE_REGULAR, Integer.parseInt(daysRented));
         assertEquals(Double.parseDouble(expectedPrice), rental.getRentalPrice());
+    }
+
+    @ParameterizedTest
+    @CsvSource({"3,5","4,3.5","1,2.5","5,7"})
+    void getAmount_EnsurePriceIsNotWrong_RegularMovies(String daysRented, String expectedPrice)
+    {
+        Rental rental = new Rental(MOVIE_REGULAR, Integer.parseInt(daysRented));
+        assertNotSame(Double.parseDouble(expectedPrice), rental.getRentalPrice());
     }
 }
