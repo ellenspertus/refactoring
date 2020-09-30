@@ -1,5 +1,6 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 public class StatementGenerator {
@@ -26,12 +27,15 @@ public class StatementGenerator {
 
     private static String generateRental(Rental rental) {
         return String.format(RENTAL_TEMPLATE, rental.getMovie(),
-                NumberFormat.getCurrencyInstance().format(rental.getRentalPrice()));
+                formatMoney(rental.getRentalPrice()));
     }
 
     private static String generateFooter(Customer customer) {
-        return String.format(FOOTER_TEMPLATE,
-                NumberFormat.getCurrencyInstance().format(customer.getTotalCharge()),
+        return String.format(FOOTER_TEMPLATE, formatMoney(customer.getTotalCharge()),
                 customer.getFrequentRenterPoints());
+    }
+
+    private static String formatMoney(BigDecimal bd) {
+        return NumberFormat.getCurrencyInstance().format(bd);
     }
 }
