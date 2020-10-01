@@ -1,5 +1,7 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.BigDecimal;
+
 public class Movie {
 
     public static final int CHILDREN = 2;
@@ -34,5 +36,25 @@ public class Movie {
             frequentRenterPoints++;
         }
         return frequentRenterPoints;
+    }
+
+    protected BigDecimal getRentalPrice(int daysRented) {
+        BigDecimal amount = new BigDecimal(0);
+        switch (getPriceCode()) {
+            case Movie.REGULAR:
+                amount = amount.add(new BigDecimal(2));
+                if (daysRented > 2)
+                    amount = amount.add(new BigDecimal((daysRented - 2) * 1.5));
+                break;
+            case Movie.NEW_RELEASE:
+                amount = amount.add(new BigDecimal(daysRented * 3));
+                break;
+            case Movie.CHILDREN:
+                amount = amount.add(new BigDecimal(1.5));
+                if (daysRented > 3)
+                    amount = amount.add(new BigDecimal((daysRented - 3) * 1.5));
+                break;
+        }
+        return amount;
     }
 }

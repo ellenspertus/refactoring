@@ -21,23 +21,7 @@ public class Rental {
     }
 
     protected BigDecimal getRentalPrice() {
-        BigDecimal amount = new BigDecimal(0);
-        switch (getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                amount = amount.add(new BigDecimal(2));
-                if (getDaysRented() > 2)
-                    amount = amount.add(new BigDecimal((getDaysRented() - 2) * 1.5));
-                break;
-            case Movie.NEW_RELEASE:
-                amount = amount.add(new BigDecimal(getDaysRented() * 3));
-                break;
-            case Movie.CHILDREN:
-                amount = amount.add(new BigDecimal(1.5));
-                if (getDaysRented() > 3)
-                    amount = amount.add(new BigDecimal((getDaysRented() - 3) * 1.5));
-                break;
-        }
-        return amount;
+        return movie.getRentalPrice(daysRented);
     }
 
     protected int getFrequentRenterPoints() {
