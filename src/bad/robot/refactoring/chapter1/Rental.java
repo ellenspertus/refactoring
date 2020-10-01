@@ -41,6 +41,4 @@ public class Rental {
     protected int getFrequentRenterPoints() {
         return getMovie().getFrequentRenterPoints(daysRented);
     }
-
-
 }
