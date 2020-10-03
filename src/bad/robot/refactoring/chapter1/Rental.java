@@ -1,5 +1,7 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.BigDecimal;
+
 public class Rental {
 
     private Movie movie;
@@ -18,24 +20,34 @@ public class Rental {
         return daysRented;
     }
 
-    protected double getRentPrice() {
-        double amount = 0;
+    protected BigDecimal getRentPrice() {
+
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                amount += 2;
+
+                BigDecimal regularAmount = BigDecimal.valueOf(2);
                 if (getDaysRented() > 2)
-                    amount += (getDaysRented() - 2) * 1.5;
-                break;
+                    regularAmount =
+                            regularAmount.add(BigDecimal.valueOf((getDaysRented() - 2) * 1.5));
+                return regularAmount;
+
             case Movie.NEW_RELEASE:
-                amount += getDaysRented() * 3;
-                break;
+                return BigDecimal.valueOf(getDaysRented() * 3);
+
             case Movie.CHILDREN:
-                amount += 1.5;
+                BigDecimal childrenAmount = BigDecimal.valueOf(1.5);
                 if (getDaysRented() > 3)
-                    amount += (getDaysRented() - 3) * 1.5;
-                break;
+                    childrenAmount =
+                            childrenAmount.add(BigDecimal.valueOf((getDaysRented() - 3) * 1.5));
+                return childrenAmount;
+
+            default:
+                throw new UnsupportedOperationException();
         }
-        return amount;
+
     }
 
+    protected int getFrequentRenterPoints() {
+        return getMovie().getFrequentRenterPoints(getDaysRented());
+    }
 }
