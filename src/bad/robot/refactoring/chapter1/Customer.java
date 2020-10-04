@@ -21,23 +21,27 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public String statement() {
-        BigDecimal totalAmount = BigDecimal.valueOf(0);
-        int frequentRenterPoints = 0;
-
-        String result = "Rental record for " + getName() + "\n";
-        for (Rental rental : rentals) {
-
-            frequentRenterPoints += rental.getFrequentRenterPoints();
-
-            // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + rental.getRentPrice() + "\n";
-            totalAmount.add(rental.getRentPrice());
-        }
-
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
-        return result;
+    public List<Rental> getRentals() {
+        return rentals;
     }
 
+    public int getFrequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : rentals) {
+            frequentRenterPoints += rental.getFrequentRenterPoints();
+        }
+        return frequentRenterPoints;
+    }
+
+    public BigDecimal getTotalCharge() {
+        BigDecimal totalCharge = new BigDecimal(0);
+        for (Rental rental : rentals) {
+            totalCharge = totalCharge.add(rental.getRentalPrice());
+        }
+        return totalCharge;
+    }
+
+    public String generateStatement() {
+        return TextStatementGenerator.getInstance().generateStatement(this);
+    }
 }

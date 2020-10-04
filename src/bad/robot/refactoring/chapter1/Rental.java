@@ -20,34 +20,27 @@ public class Rental {
         return daysRented;
     }
 
-    protected BigDecimal getRentPrice() {
-
+    protected BigDecimal getRentalPrice() {
+        BigDecimal amount = new BigDecimal(0);
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
-
-                BigDecimal regularAmount = BigDecimal.valueOf(2);
+                amount = amount.add(new BigDecimal(2));
                 if (getDaysRented() > 2)
-                    regularAmount =
-                            regularAmount.add(BigDecimal.valueOf((getDaysRented() - 2) * 1.5));
-                return regularAmount;
-
+                    amount = amount.add(new BigDecimal((getDaysRented() - 2) * 1.5));
+                break;
             case Movie.NEW_RELEASE:
-                return BigDecimal.valueOf(getDaysRented() * 3);
-
+                amount = amount.add(new BigDecimal(getDaysRented() * 3));
+                break;
             case Movie.CHILDREN:
-                BigDecimal childrenAmount = BigDecimal.valueOf(1.5);
+                amount = amount.add(new BigDecimal(1.5));
                 if (getDaysRented() > 3)
-                    childrenAmount =
-                            childrenAmount.add(BigDecimal.valueOf((getDaysRented() - 3) * 1.5));
-                return childrenAmount;
-
-            default:
-                throw new UnsupportedOperationException();
+                    amount = amount.add(new BigDecimal((getDaysRented() - 3) * 1.5));
+                break;
         }
-
+        return amount;
     }
 
     protected int getFrequentRenterPoints() {
-        return getMovie().getFrequentRenterPoints(getDaysRented());
+        return getMovie().getFrequentRenterPoints(daysRented);
     }
 }
