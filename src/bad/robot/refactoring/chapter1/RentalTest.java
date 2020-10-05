@@ -28,7 +28,7 @@ class RentalTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,1.5", "2,1.5", "3,1.5", "4,3", "10,12"})
+    @CsvSource({"1,1.5", "2,1.5", "3,1.5", "4,3", "10,12.0000000000000000000000000000000006"})
     void getAmount_CorrectValue_ChildrensMovie(int days, BigDecimal cost) {
         Rental rental1 = new Rental(MOVIE_CHILDRENS, days);
         assertEquals(cost.doubleValue(), rental1.getRentalPrice().doubleValue(),
