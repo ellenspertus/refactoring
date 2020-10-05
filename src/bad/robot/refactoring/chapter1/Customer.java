@@ -33,7 +33,7 @@ public class Customer {
     }
 
     public double getTotalCharge() {
-        int totalCharge = 0;
+        double totalCharge = 0;
         for (Rental rental : rentals) {
             totalCharge += rental.getRentalPrice();
         }

@@ -1,6 +1,7 @@
 package bad.robot.refactoring.chapter1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,27 +15,27 @@ class RentalTest {
     @CsvSource({"1,1.5", "2,1.5", "3,1.5", "5,4.5", "6,6", "9999,14995.5"})
     void getAmount_CorrectValue_ChildrensMovie(int input, double expected) {
         Rental rental = new Rental(MOVIE_CHILDRENS, input);
-        assertEquals(expected, rental.getRentalPrice());
+        assertEquals(BigDecimal.valueOf(expected).doubleValue(), rental.getRentalPrice());
     }
-  
+
     @Test
     void getAmount_CorrectValue_RegularMovie() {
         Rental rental = new Rental(MOVIE_REGULAR, 1);
-        assertEquals(2, rental.getRentalPrice());
+        assertEquals(BigDecimal.valueOf(2).doubleValue(), rental.getRentalPrice());
     }
 
     @ParameterizedTest
-    @CsvSource({"3,3.5","4,5","1,2","5,6.5"})
-    void getAmount_CorrectValue_RegularMovies(String daysRented, String expectedPrice)
-    {
-        Rental rental = new Rental(MOVIE_REGULAR, Integer.parseInt(daysRented));
-        assertEquals(Double.parseDouble(expectedPrice), rental.getRentalPrice());
+    @CsvSource({"3,3.5", "4,5", "1,2", "5,6.5"})
+    void getAmount_CorrectValue_RegularMovies(int daysRented, double expectedPrice) {
+        Rental rental = new Rental(MOVIE_REGULAR, daysRented);
+        assertEquals(BigDecimal.valueOf(expectedPrice).doubleValue(), rental.getRentalPrice());
     }
 
     @ParameterizedTest
     @CsvSource({"1,3", "2,6", "3,9", "10,30"})
     void getAmount_CorrectValue_NewMovie(int days, int cost) {
         Rental rental = new Rental(MOVIE_NEW, days);
-        assertEquals(cost, rental.getRentalPrice(), "Wrong cost for " + days + "-day rental");
+        assertEquals(BigDecimal.valueOf(cost).doubleValue(), rental.getRentalPrice(),
+                "Wrong cost for " + days + "-day rental");
     }
 }
