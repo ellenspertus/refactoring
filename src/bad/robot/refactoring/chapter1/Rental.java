@@ -25,7 +25,7 @@ public class Rental {
         return daysRented;
     }
 
-    protected double getRentalPrice() {
+    protected BigDecimal getRentalPrice() {
         BigDecimal amount = new BigDecimal(0);
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
@@ -47,7 +47,7 @@ public class Rental {
                 }
                 break;
         }
-        return amount.doubleValue();
+        return amount;
     }
 
     protected int getFrequentRenterPoints() {
