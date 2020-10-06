@@ -42,6 +42,6 @@ public class Customer {
     }
 
     public String generateStatement() {
-        return TextStatementGenerator.getInstance().generateStatement(this);
+        return StatementGenerator.generateStatement(this);
     }
 }

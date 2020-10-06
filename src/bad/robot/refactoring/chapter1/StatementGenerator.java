@@ -4,17 +4,14 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 public class StatementGenerator {
-    private final String headerTemplate;
-    private final String rentalTemplate;
-    private final String footerTemplate;
+    private static final String HEADER_TEMPLATE = "Rental Record for %1s\n";
+    private static final String RENTAL_TEMPLATE = "\t%1s\t%2s\n";
+    private static final String FOOTER_TEMPLATE =
+            "Amount owed is %1s\nYou earned %d frequent renter points\n";
 
-    protected StatementGenerator(String header, String rental, String footer) {
-        headerTemplate = header;
-        rentalTemplate = rental;
-        footerTemplate = footer;
-    }
+    private StatementGenerator() {}
 
-    public String generateStatement(Customer customer) {
+    public static String generateStatement(Customer customer) {
         StringBuilder sb = new StringBuilder();
         sb.append(generateHeader(customer));
         for (Rental rental : customer.getRentals()) {
@@ -24,21 +21,21 @@ public class StatementGenerator {
         return sb.toString();
     }
 
-    private String generateHeader(Customer customer) {
-        return String.format(headerTemplate, customer.getName());
+    private static String generateHeader(Customer customer) {
+        return String.format(HEADER_TEMPLATE, customer.getName());
     }
 
-    private String generateRental(Rental rental) {
-        return String.format(rentalTemplate, rental.getMovie(),
+    private static String generateRental(Rental rental) {
+        return String.format(RENTAL_TEMPLATE, rental.getMovie(),
                 formatMoney(rental.getRentalPrice()));
     }
 
-    private String generateFooter(Customer customer) {
-        return String.format(footerTemplate, formatMoney(customer.getTotalCharge()),
+    private static String generateFooter(Customer customer) {
+        return String.format(FOOTER_TEMPLATE, formatMoney(customer.getTotalCharge()),
                 customer.getFrequentRenterPoints());
     }
 
-    private String formatMoney(BigDecimal bd) {
+    private static String formatMoney(BigDecimal bd) {
         return NumberFormat.getCurrencyInstance().format(bd);
     }
 }
