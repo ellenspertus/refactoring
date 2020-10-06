@@ -6,9 +6,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class RentalTest {
-    private static final Movie MOVIE_NEW = new Movie("Onward", Movie.NEW_RELEASE);
-    private static final Movie MOVIE_CHILDRENS = new Movie("Sinbad", Movie.CHILDREN);
-    private static final Movie MOVIE_REGULAR = new Movie("2012", Movie.REGULAR);
+    private static final Movie MOVIE_NEW = new Movie("The Avengers", Movie.NEW_RELEASE);
+    private static final Movie MOVIE_CHILDRENS = new Movie("Frozen", Movie.CHILDREN);
+    private static final Movie MOVIE_REGULAR = new Movie("Airplane!", Movie.REGULAR);
+
+    @Test
+    void getRentalPrice_CorrectValue_RegularMovieTwoDay() {
+        Rental regTwoDay = new Rental(MOVIE_REGULAR, 2);
+        assertEquals(regTwoDay.getRentalPrice(), 2);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 1.5", "3, 1.5", "4, 1.5"})
+    void getRentalPrice_CorrectValue_ChildrensMovieSO(int days, double cost) {
+        Rental childRental = new Rental(MOVIE_CHILDRENS, 3);
+        assertEquals(cost, childRental.getRentalPrice(), "Wrong cost for " + days + "days.");
 
     @ParameterizedTest
     @CsvSource({"1,1.5", "2,1.5", "3,1.5", "5,4.5", "6,6", "9999,14995.5"})
