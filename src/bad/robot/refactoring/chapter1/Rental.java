@@ -25,7 +25,7 @@ public class Rental {
             case Movie.REGULAR:
                 BigDecimal regularAmount = BigDecimal.valueOf(2);
                 if (getDaysRented() > 2) {
-                    regularAmount = BigDecimal.valueOf((getDaysRented() - 2) * 1.5);
+                    regularAmount = regularAmount.add(BigDecimal.valueOf((getDaysRented() - 2) * 1.5));
                 }
                 return regularAmount;
             case Movie.NEW_RELEASE:
