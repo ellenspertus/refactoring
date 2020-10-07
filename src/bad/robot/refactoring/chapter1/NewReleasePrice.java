@@ -9,7 +9,7 @@ public class NewReleasePrice extends Price {
     }
 
     @Override
-    BigDecimal getRentalPrice(int daysRented) {
-        return BigDecimal.valueOf(daysRented * 3);
+    BigDecimal getCharge(int numDays) {
+        return BigDecimal.valueOf(numDays * 3);
     }
 }

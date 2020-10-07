@@ -13,14 +13,16 @@ class RentalTest {
     @Test
     void getRentalPrice_CorrectValue_RegularMovieTwoDay() {
         Rental regTwoDay = new Rental(MOVIE_REGULAR, 2);
-        assertEquals(regTwoDay.getRentalPrice(), 2);
+        assertEquals(2, regTwoDay.getRentalPrice().doubleValue());
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1, 1.5", "3, 1.5", "4, 1.5"})
     void getRentalPrice_CorrectValue_ChildrensMovieSO(int days, double cost) {
         Rental childRental = new Rental(MOVIE_CHILDRENS, 3);
-        assertEquals(cost, childRental.getRentalPrice(), "Wrong cost for " + days + "days.");
+        assertEquals(cost, childRental.getRentalPrice().doubleValue(),
+                "Wrong cost for " + days + "days.");
+    }
 
     @ParameterizedTest
     @CsvSource({"1,1.5", "2,1.5", "3,1.5", "5,4.5", "6,6", "9999,14995.5"})
@@ -32,7 +34,7 @@ class RentalTest {
     @Test
     void getAmount_CorrectValue_RegularMovie() {
         Rental rental = new Rental(MOVIE_REGULAR, 1);
-        assertEquals(2, rental.getRentalPrice().intValue());
+        assertEquals(2, rental.getRentalPrice().doubleValue());
     }
 
     @ParameterizedTest

@@ -9,9 +9,9 @@ public class ChildrensPrice extends Price {
     }
 
     @Override
-    BigDecimal getRentalPrice(int daysRented) {
-        if (daysRented > 3) {
-            return BigDecimal.valueOf(1.5 + (daysRented - 3) * 1.5);
+    BigDecimal getCharge(int numDays) {
+        if (numDays > 3) {
+            return BigDecimal.valueOf(1.5 + (numDays - 3) * 1.5);
         } else {
             return BigDecimal.valueOf(1.5);
         }
