@@ -1,0 +1,13 @@
+package bad.robot.refactoring.chapter1;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+class RentalTest {
+
+  @Test
+  void test() {
+    fail("Not yet implemented");
+  }
+
+}
