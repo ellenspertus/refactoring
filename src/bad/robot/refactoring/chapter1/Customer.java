@@ -1,5 +1,6 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +33,11 @@ public class Customer {
         return frequentRenterPoints;
     }
 
-    public double getTotalCharge() {
-        int totalCharge = 0;
+    public BigDecimal getTotalCharge() {
+        BigDecimal totalCharge = BigDecimal.valueOf(0);
         for (Rental rental : rentals) {
-            totalCharge += rental.getRentalPrice();
+            // totalCharge += rental.getRentalPrice();
+            totalCharge = totalCharge.add(rental.getRentalPrice());
         }
         return totalCharge;
     }
