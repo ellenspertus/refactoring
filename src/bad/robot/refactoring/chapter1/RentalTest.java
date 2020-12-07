@@ -48,7 +48,6 @@ class RentalTest {
     @CsvSource({"1,3", "2,6", "3,9", "10,30"})
     void getAmount_CorrectValue_NewMovie(int days, double cost) {
         Rental rental = new Rental(MOVIE_NEW, days);
-        assertEquals(cost, rental.getRentalPrice().doubleValue(),
-                "Wrong cost for " + days + "-day rental");
+        assertEquals(cost, rental.getRentalPrice().doubleValue());
     }
 }

@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 
 public class Rental {
 
+    final private int NEW_RELEASE_RENTAL_LIMIT = 0;
+    final private int REGUALAR_RENTAL_LIMIT = 2;
+    final private int CHILDRENS_RENTAL_LIMIT = 3;
+    final private float DAILY_CHARGE = 1.5f;
+
     private Movie movie;
     private int daysRented;
 
