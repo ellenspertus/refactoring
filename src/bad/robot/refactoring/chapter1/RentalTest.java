@@ -12,7 +12,7 @@ class RentalTest {
     private static final Movie MOVIE_REGULAR = new Movie("2012", Movie.REGULAR);
 
     @ParameterizedTest
-    @CsvSource({"1,1.5", "2,1.5", "3,1.5", "5,4.5", "6,6", "9999,14995.5"})
+    @CsvSource({"1,1.50", "2,1.50", "3,1.50", "4,3.00","5,4.50", "6,6.00", "9999,14995.50"})
     void getAmount_CorrectValue_ChildrensMovie(int input, BigDecimal expected) {
         Rental rental = new Rental(MOVIE_CHILDRENS, input);
         assertEquals(expected, rental.getRentalPrice());
@@ -21,19 +21,19 @@ class RentalTest {
     @Test
     void getAmount_CorrectValue_RegularMovie() {
         Rental rental = new Rental(MOVIE_REGULAR, 1);
-        assertEquals(BigDecimal.valueOf(2), rental.getRentalPrice());
+        assertEquals(new BigDecimal("2.00"), rental.getRentalPrice());
     }
 
     @ParameterizedTest
-    @CsvSource({"3,3.5","4,5","1,2","5,6.5"})
+    @CsvSource({"3,3.50","4,5.00","1,2.00","5,6.50"})
     void getAmount_CorrectValue_RegularMovies(int daysRented, BigDecimal expectedPrice)
     {
         Rental rental = new Rental(MOVIE_REGULAR, daysRented);
-        assertEquals(expectedPrice,rental.getRentalPrice());
+        assertEquals(expectedPrice, rental.getRentalPrice());
     }
 
     @ParameterizedTest
-    @CsvSource({"1,3", "2,6", "3,9", "10,30"})
+    @CsvSource({"1,3.00", "2,6.00", "3,9.00", "10,30.00"})
     void getAmount_CorrectValue_NewMovie(int days, BigDecimal cost) {
         Rental rental = new Rental(MOVIE_NEW, days);
         assertEquals(cost, rental.getRentalPrice(), "Wrong cost for " + days + "-day rental");

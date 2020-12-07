@@ -23,17 +23,17 @@ public class Rental {
     protected BigDecimal getRentalPrice() {
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                BigDecimal regularAmount = BigDecimal.valueOf(2);
+                BigDecimal regularAmount = new BigDecimal("2.00");
                 if (getDaysRented() > 2) {
-                    regularAmount = regularAmount.add(BigDecimal.valueOf((getDaysRented() - 2) * 1.5));
+                    regularAmount = regularAmount.add(BigDecimal.valueOf(getDaysRented() - 2).multiply(BigDecimal.valueOf(1.5)));
                 }
                 return regularAmount;
             case Movie.NEW_RELEASE:
-                return BigDecimal.valueOf(getDaysRented() * 3);
+                return BigDecimal.valueOf(getDaysRented()).multiply(new BigDecimal("3.00"));
             case Movie.CHILDREN:
-                BigDecimal childrenAmount = BigDecimal.valueOf(1.5);
+                BigDecimal childrenAmount = new BigDecimal("1.50");
                 if (getDaysRented() > 3)
-                    childrenAmount = childrenAmount.add(BigDecimal.valueOf((getDaysRented() - 3) * 1.5));
+                    childrenAmount = childrenAmount.add(BigDecimal.valueOf(getDaysRented() - 3).multiply(BigDecimal.valueOf(1.5)));
                 return childrenAmount;
             default:
                 throw new UnsupportedOperationException();
