@@ -3,7 +3,7 @@ package bad.robot.refactoring.chapter1;
 import java.math.BigDecimal;
 
 public class NewReleasePrice extends Price {
-    private static final int DAILY_CHARGE = 3;
+    private static final BigDecimal DAILY_CHARGE = BigDecimal.valueOf(3);
 
     @Override
     int getPriceCode() {
@@ -12,6 +12,6 @@ public class NewReleasePrice extends Price {
 
     @Override
     BigDecimal getCharge(int numDays) {
-        return BigDecimal.valueOf(numDays * DAILY_CHARGE);
+        return DAILY_CHARGE.multiply(BigDecimal.valueOf(numDays));
     }
 }

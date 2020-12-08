@@ -7,13 +7,13 @@ public abstract class Price {
 
     abstract BigDecimal getCharge(int numDays);
 
-    protected BigDecimal calculateCharge(int numDays, double baseCharge, int rentalPeriod,
-            double dailyLateFee) {
+    protected BigDecimal calculateCharge(int numDays, BigDecimal baseCharge, int rentalPeriod,
+            BigDecimal dailyLateFee) {
         int extraDays = numDays - rentalPeriod;
         if (extraDays > 0) {
-            return BigDecimal.valueOf(baseCharge + (extraDays * dailyLateFee));
+            return baseCharge.add(BigDecimal.valueOf(extraDays).multiply(dailyLateFee));
         } else {
-            return BigDecimal.valueOf(baseCharge);
+            return baseCharge;
         }
     }
 }

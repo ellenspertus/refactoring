@@ -34,7 +34,7 @@ public class Customer {
     }
 
     public BigDecimal getTotalCharge() {
-        BigDecimal totalCharge = new BigDecimal(0);
+        BigDecimal totalCharge = BigDecimal.valueOf(0);
         for (Rental rental : rentals) {
             totalCharge = totalCharge.add(rental.getRentalPrice());
         }
