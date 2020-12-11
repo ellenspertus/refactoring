@@ -21,7 +21,7 @@ class RentalTest {
     @Test
     void getAmount_CorrectValue_RegularMovie() {
         Rental rental = new Rental(MOVIE_REGULAR, 1);
-        assertEquals(new BigDecimal("2.00"), rental.getRentalPrice());
+        assertEquals(2.0, rental.getRentalPrice().doubleValue());
     }
 
     @ParameterizedTest

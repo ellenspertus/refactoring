@@ -33,7 +33,7 @@ public class Rental {
             case Movie.CHILDREN:
                 BigDecimal childrenAmount = new BigDecimal("1.50");
                 if (getDaysRented() > 3)
-                    childrenAmount = childrenAmount.add(BigDecimal.valueOf(getDaysRented() - 3).multiply(BigDecimal.valueOf(1.5)));
+                    childrenAmount = childrenAmount.add(BigDecimal.valueOf(getDaysRented() - 3).multiply(childrenAmount));
                 return childrenAmount;
             default:
                 throw new UnsupportedOperationException();
