@@ -1,9 +1,17 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Rental {
 
     private Movie movie;
     private int daysRented;
+
+    private static final BigDecimal REGULAR_RENTAL_COST = new BigDecimal("2.00");
+    private static final BigDecimal EXTENDED_REGULAR_RENTAL_COST = new BigDecimal("1.50");
+    private static final BigDecimal NEW_RELEASE_RENTAL_COST = new BigDecimal("3.00");
+    private static final BigDecimal CHILDREN_RENTAL_COST = new BigDecimal("1.50");
 
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;
@@ -18,24 +26,29 @@ public class Rental {
         return daysRented;
     }
 
-    protected double getRentalPrice() {
-        double amount = 0;
+    protected BigDecimal getRentalPrice() {
+        BigDecimal amount = new BigDecimal("0.00");
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                amount += 2;
-                if (getDaysRented() > 2)
-                    amount += (getDaysRented() - 2) * 1.5;
+                amount = amount.add(REGULAR_RENTAL_COST);
+                if (getDaysRented() > 2) {
+                    BigDecimal extraDaysRented = new BigDecimal(getDaysRented() - 2);
+                    amount = amount.add(extraDaysRented.multiply(EXTENDED_REGULAR_RENTAL_COST));
+                }
                 break;
             case Movie.NEW_RELEASE:
-                amount += getDaysRented() * 3;
+                BigDecimal newReleaseTotal = new BigDecimal(getDaysRented()).multiply(NEW_RELEASE_RENTAL_COST);
+                amount = amount.add(newReleaseTotal);
                 break;
             case Movie.CHILDREN:
-                amount += 1.5;
-                if (getDaysRented() > 3)
-                    amount += (getDaysRented() - 3) * 1.5;
+                amount = amount.add(CHILDREN_RENTAL_COST);
+                if (getDaysRented() > 3) {
+                    BigDecimal extraDaysRented = new BigDecimal(getDaysRented() - 3);
+                    amount = amount.add(extraDaysRented.multiply(CHILDREN_RENTAL_COST));
+                }
                 break;
         }
-        return amount;
+        return amount.setScale(2, RoundingMode.HALF_UP);
     }
 
     protected int getFrequentRenterPoints() {
