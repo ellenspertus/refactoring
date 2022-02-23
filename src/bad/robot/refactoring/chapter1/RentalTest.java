@@ -1,8 +1,6 @@
 package bad.robot.refactoring.chapter1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
 
@@ -17,5 +15,11 @@ class RentalTest {
     void testGetChildrenPrice(int days, double expected) {
         Rental childrenMovie = new Rental(FINDING_NEMO, days);
         assertEquals(expected, childrenMovie.getPrice());
+    }
+
+    @CsvSource(value = {"2, 6", "4, 12", "1,3"})
+    void testGetPriceForNewRelease(int days, int expectedPrice) {
+        Rental newMovie = new Rental(DEATH_ON_THE_NILE, days);
+        assertEquals(expectedPrice, newMovie.getPrice());
     }
 }
