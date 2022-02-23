@@ -19,7 +19,7 @@ class RentalTest {
     }
 
     @CsvSource({"1, 2", "3, 3.5", "10, 14"})
-    void testGetPrice(int days, double expected) {
+    void testGetBlindSidePrice(int days, double expected) {
         Rental rentTest = new Rental(THE_BLIND_SIDE, days);
         assertEquals(expected, rentTest.getPrice());
     }
