@@ -17,5 +17,17 @@ class RentalTest {
     void testGetChildrenPrice(int days, double expected) {
         Rental childrenMovie = new Rental(FINDING_NEMO, days);
         assertEquals(expected, childrenMovie.getPrice());
+
+    @ParameterizedTest
+    @CsvSource(value = {"2, 6", "4, 12", "1,3"})
+    void testGetNewReleasePrice(int days, int expectedPrice) {
+        Rental newMovie = new Rental(DEATH_ON_THE_NILE, days);
+        assertEquals(expectedPrice, newMovie.getPrice());
+
+    @ParameterizedTest
+    @CsvSource({"1, 2", "3, 3.5", "10, 14"})
+    void testGetRegularPrice(int days, double expected) {
+        Rental rentTest = new Rental(THE_BLIND_SIDE, days);
+        assertEquals(expected, rentTest.getPrice());
     }
 }
