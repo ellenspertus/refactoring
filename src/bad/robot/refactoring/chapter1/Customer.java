@@ -19,29 +19,25 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public String statement() {
-        double totalAmount = 0;
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public int calculateFrequentRenterPoints() {
         int frequentRenterPoints = 0;
 
-        String result = "Rental record for " + getName() + "\n";
         for (Rental rental : rentals) {
-            double amount = rental.getPrice();
-
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1)
-                frequentRenterPoints++;
-
-            // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
-
-            totalAmount += amount;
+            frequentRenterPoints += rental.calculateFrequentRenterPoints();
         }
 
-        result += "Amount owed is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        return frequentRenterPoints;
+    }
 
-        return result;
+    public double calculateTotalPrice() {
+        double total = 0;
+        for (Rental rental : rentals) {
+            total += rental.getPrice();
+        }
+        return total;
     }
 }
