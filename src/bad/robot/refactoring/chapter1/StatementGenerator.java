@@ -4,6 +4,11 @@ import java.math.*;
 import java.text.*;
 
 public class StatementGenerator {
+    private static final String HEADER_TEMPLATE = "Rental record for %1s\n";
+    private static final String RENTAL_TEMPLATE = "\t%1s\t%2s\n";
+    private static final String FOOTER_TEMPLATE =
+            "Amount owed is %1s\nYou earned %2s frequent renter points";
+
     public static String generateStatement(Customer customer) {
         String result = generateHeader(customer);
         result += generateBody(customer);
@@ -12,17 +17,14 @@ public class StatementGenerator {
     }
 
     private static String generateHeader(Customer customer) {
-        return "Rental record for " + customer.getName() + "\n";
+        return String.format(HEADER_TEMPLATE, customer.getName());
     }
 
     private static String generateBody(Customer customer) {
         StringBuilder result = new StringBuilder();
         for (Rental rental : customer.getRentals()) {
-            result.append("\t");
-            result.append(rental.getMovie().getTitle());
-            result.append("\t");
-            result.append(rental.getPrice());
-            result.append("\n");
+            result.append(String.format(RENTAL_TEMPLATE, rental.getMovie().getTitle(),
+                    bigDecimalToCurrency(rental.getPrice())));
         }
         return result.toString();
     }
@@ -30,9 +32,8 @@ public class StatementGenerator {
     private static String generateFooter(Customer customer) {
         int frequentRenterPoints = customer.calculateFrequentRenterPoints();
         BigDecimal totalAmount = customer.calculateTotalPrice();
-        String result = "Amount owed is " + bigDecimalToCurrency(totalAmount) + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
-        return result;
+        return String.format(FOOTER_TEMPLATE, bigDecimalToCurrency(totalAmount),
+                frequentRenterPoints);
     }
 
     private static String bigDecimalToCurrency(BigDecimal bd) {
