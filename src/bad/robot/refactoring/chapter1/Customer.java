@@ -1,5 +1,6 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.*;
 import java.util.*;
 
 public class Customer {
@@ -33,10 +34,10 @@ public class Customer {
         return frequentRenterPoints;
     }
 
-    public double calculateTotalPrice() {
-        double total = 0;
+    public BigDecimal calculateTotalPrice() {
+        BigDecimal total = BigDecimal.ZERO;
         for (Rental rental : rentals) {
-            total += rental.getPrice();
+            total = total.add(rental.getPrice());
         }
         return total;
     }

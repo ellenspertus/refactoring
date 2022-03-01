@@ -1,5 +1,8 @@
 package bad.robot.refactoring.chapter1;
 
+import java.math.*;
+import java.text.*;
+
 public class StatementGenerator {
     public static String generateStatement(Customer customer) {
         String result = generateHeader(customer);
@@ -26,9 +29,13 @@ public class StatementGenerator {
 
     private static String generateFooter(Customer customer) {
         int frequentRenterPoints = customer.calculateFrequentRenterPoints();
-        double totalAmount = customer.calculateTotalPrice();
-        String result = "Amount owed is " + totalAmount + "\n";
+        BigDecimal totalAmount = customer.calculateTotalPrice();
+        String result = "Amount owed is " + bigDecimalToCurrency(totalAmount) + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points";
         return result;
+    }
+
+    private static String bigDecimalToCurrency(BigDecimal bd) {
+        return NumberFormat.getCurrencyInstance().format(bd);
     }
 }
