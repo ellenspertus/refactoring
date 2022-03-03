@@ -1,7 +1,6 @@
 package bad.robot.refactoring.chapter1;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Customer {
 
@@ -50,13 +49,13 @@ public class Customer {
                 frequentRenterPoints++;
 
             // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
+            result += "\t" + rental.getMovie().getTitle() + "\t" + amount + "\n";
 
             totalAmount += amount;
         }
 
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        result += "Amount owed is " + totalAmount + "\n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points";
 
         return result;
     }
