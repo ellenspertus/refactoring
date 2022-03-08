@@ -1,0 +1,5 @@
+Rental record for Maria
+	Cindarella	$1.50
+	Batman	$6.00
+Amount owed is $7.50
+You earned 3 frequent renter points

@@ -1,10 +1,10 @@
 package bad.robot.refactoring.chapter1;
 
 public class SpanishStatementGenerator extends StatementGenerator {
-    private static final String HEADER_TEMPLATE = "Registro de alqiuiler de %1s\n";
-    private static final String RENTAL_TEMPLATE = "\t%1s\t%2s\n";
+    private static final String HEADER_TEMPLATE = "Registro de alqiuiler de %s\n";
+    private static final String RENTAL_TEMPLATE = "\t%s\t%s\n";
     private static final String FOOTER_TEMPLATE =
-            "El monto adeudado es %1s\nGanaste %2s puntos de arrendatario frecuente";
+            "El monto adeudado es %s\nGanaste %s puntos de arrendatario frecuente";
     private static final SpanishStatementGenerator INSTANCE = new SpanishStatementGenerator();
 
     private SpanishStatementGenerator() {
