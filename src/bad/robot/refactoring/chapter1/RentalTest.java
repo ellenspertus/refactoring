@@ -6,10 +6,10 @@ import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
 
 class RentalTest {
-    private static final Movie FINDING_NEMO = new Movie("Finding Nemo", Movie.CHILDREN);
+    private static final Movie FINDING_NEMO = new Movie("Finding Nemo", Price.CHILDRENS_PRICE);
     private static final Movie DEATH_ON_THE_NILE =
-            new Movie("Death on the Nile", Movie.NEW_RELEASE);
-    private static final Movie THE_BLIND_SIDE = new Movie("The Blind Side", Movie.REGULAR);
+            new Movie("Death on the Nile", NewReleasePrice.getInstance());
+    private static final Movie THE_BLIND_SIDE = new Movie("The Blind Side", Price.REGULAR_PRICE);
 
     @ParameterizedTest
     @CsvSource(value = {"3, 1.5", "5, 4.5", "10, 12"})

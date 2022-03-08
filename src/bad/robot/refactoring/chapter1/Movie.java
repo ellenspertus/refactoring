@@ -7,23 +7,23 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
+    private Price price;
 
-    public Movie(String title, int priceCode) {
+    public Movie(String title, Price price) {
         this.title = title;
-        this.priceCode = priceCode;
+        this.price = price;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public int getPriceCode() {
-        return priceCode;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setPriceCode(int priceCode) {
-        this.priceCode = priceCode;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
 }
